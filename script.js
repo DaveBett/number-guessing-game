@@ -22,9 +22,9 @@ function checkGuess(targetNumber, guess) {
   correct = false;
   checkResult = "";
   if (guess < targetNumber) {
-    checkResult = "Guessed number too low, try again";
+    checkResult = "Guessed number too low";
   } else if (guess > targetNumber) {
-    checkResult = "Guessed number too high, try again";
+    checkResult = "Guessed number too high";
   } else {
     checkResult = "That's right! You win";
     correct = true;
