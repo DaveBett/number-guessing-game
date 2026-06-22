@@ -1,5 +1,5 @@
 function generateRandomNumber() {
-  return Math.floor(Math.random() * 100) + 1;
+  targetNumber = Math.floor(Math.random() * 100) + 1;
 }
 function getPlayerGuess() {
   guess = prompt("Enter a whole number between 1 and 100");
@@ -19,15 +19,34 @@ function getPlayerGuess() {
   return guess;
 }
 function checkGuess(targetNumber, guess) {
+  correct = false;
+  checkResult = "";
   if (guess < targetNumber) {
-    alert("Guessed number too low, try again");
+    checkResult = "Guessed number too low, try again";
   } else if (guess > targetNumber) {
-    alert("Guess number too high, try again");
+    checkResult = "Guessed number too high, try again";
   } else {
-    alert("That's right! You win");
+    checkResult = "That's right! You win";
+    correct = true;
   }
-} 
+}
+function game() {
+  numbersGuessed = [];
+  generateRandomNumber();
+  for (let i = 10; i > 0; i--) {
+    checkGuess(targetNumber, getPlayerGuess());
+    while (numbersGuessed.includes(guess)) {
+      alert("You already guessed that number! Try a different one");
+      getPlayerGuess();
+    }
+    if (!correct) {
+      numbersGuessed.push(guess);
+      alert(`${checkResult}, Guesses remaining: ${i - 1}, Numbers guessed: ${numbersGuessed.join(" ")}`);
+    } else {
+      return alert(`Correct! The number was ${targetNumber}! You win!`);
+    }
+  } 
+  return alert(`Too bad, out of guesses, the number was ${targetNumber}`);
+}
 
-targetNumber = generateRandomNumber();
-getPlayerGuess();
-
+game();
