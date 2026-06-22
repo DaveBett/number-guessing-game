@@ -18,6 +18,15 @@ function getPlayerGuess() {
   }
   return guess;
 }
+function checkGuess(targetNumber, guess) {
+  if (guess < targetNumber) {
+    alert("Guessed number too low, try again");
+  } else if (guess > targetNumber) {
+    alert("Guess number too high, try again");
+  } else {
+    alert("That's right! You win");
+  }
+} 
 
 targetNumber = generateRandomNumber();
 getPlayerGuess();
