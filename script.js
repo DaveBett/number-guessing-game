@@ -28,7 +28,6 @@ function checkGuess(targetNumber, guess) {
   } else if (guess > targetNumber) {
     checkResult = "Guessed number too high";
   } else {
-    checkResult = "That's right! You win";
     correct = true;
   }
 }
