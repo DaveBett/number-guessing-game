@@ -1,6 +1,7 @@
 function generateRandomNumber() {
   targetNumber = Math.floor(Math.random() * 100) + 1;
 }
+
 function getPlayerGuess() {
   guess = prompt("Enter a whole number between 1 and 100");
   guess = Number(guess);
@@ -18,6 +19,7 @@ function getPlayerGuess() {
   }
   return guess;
 }
+
 function checkGuess(targetNumber, guess) {
   correct = false;
   checkResult = "";
@@ -30,6 +32,20 @@ function checkGuess(targetNumber, guess) {
     correct = true;
   }
 }
+
+function pointsEarned(attempt) {
+  return attempt * 10; //simple point system, the sooner the suer guesses the more points he earns.
+}
+
+function restart() {
+  validation = confirm('Do you wish to restart?');
+  
+  while (validation){ // Continues asking the user if he wants to restart, once the user says No, it ends the game.
+    game();
+    restart();
+  }
+}
+
 function game() {
   numbersGuessed = [];
   generateRandomNumber();
@@ -43,10 +59,12 @@ function game() {
       numbersGuessed.push(guess);
       alert(`${checkResult}, Guesses remaining: ${i - 1}, Numbers guessed: ${numbersGuessed.join(" ")}`);
     } else {
-      return alert(`Correct! The number was ${targetNumber}! You win!`);
+      return alert(`Correct! The number was ${targetNumber}! You win! \n Your earned ${pointsEarned(i)} points!`);
     }
   } 
   return alert(`Too bad, out of guesses, the number was ${targetNumber}`);
 }
 
 game();
+restart();
+alert('GAME OVER');
