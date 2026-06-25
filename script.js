@@ -64,6 +64,7 @@ function game() {
   return alert(`Too bad, out of guesses, the number was ${targetNumber}`);
 }
 
+alert("This is a Number Guessing game, I'm going to generate a random number between 1 and 100, you'll have 10 guesses to find the number, good luck!")
 game();
 restart();
 alert('GAME OVER');
