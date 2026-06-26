@@ -5,6 +5,9 @@ function generateRandomNumber() {
 
 function getPlayerGuess() {
   let guess_prompt = prompt("Enter a whole number between 1 and 100");
+  if (guess_prompt === null) {
+    return null;
+  }
   guess = Number(guess_prompt);
   if (guess % 1 === 0)  {
     if (guess < 1) {
@@ -44,6 +47,10 @@ function game() {
   const targetNumber = generateRandomNumber();
   for (let i = 10; i > 0; i--) {
     let guess = getPlayerGuess();
+    if (guess === null) {
+      alert("Game Cancelled.")
+      return;
+    }
     let correct = checkGuess(targetNumber, guess);
     while (numbersGuessed.includes(guess)) {
       alert(`You already guessed that number! Try a different one\nYou guessed: ${numbersGuessed.join(", ")}`);
