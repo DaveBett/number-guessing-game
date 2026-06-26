@@ -23,14 +23,7 @@ function getPlayerGuess() {
 
 function checkGuess(targetNumber, guess) {
   let correct = false;
-  let checkResult = "";
-  if (guess < targetNumber) {
-    "Guessed number too low";
-  } else if (guess > targetNumber) {
-    "Guessed number too high";
-  } else {
-    correct = true;
-  }
+  correct = guess === targetNumber ? true : false;
   return correct;
 }
 
@@ -55,18 +48,18 @@ function game() {
     let guess = getPlayerGuess();
     let correct = checkGuess(targetNumber, guess);
     while (numbersGuessed.includes(guess)) {
-      alert("You already guessed that number! Try a different one");
+      alert(`You already guessed that number! Try a different one\nYou guessed: ${numbersGuessed.join(", ")}`);
       guess = getPlayerGuess();
     }
     if (!correct) {
       numbersGuessed.push(guess);
       if (guess < targetNumber) {
-        alert(`Guessed number too low, Guesses remaining: ${i - 1}, Numbers guessed: ${numbersGuessed.join(" ")}`);
+        alert(`Guessed number too low\nGuesses remaining: ${i - 1}\nNumbers guessed: ${numbersGuessed.join(", ")}`);
       } else {
-        alert(`Guess number too high, Guesses remaining: ${i - 1}, Numbers guessed: ${numbersGuessed.join(" ")}`);
+        alert(`Guess number too high\nGuesses remaining: ${i - 1}\nNumbers guessed: ${numbersGuessed.join(", ")}`);
       }
     } else {
-      return alert(`Correct! The number was ${targetNumber}! You win! \n Your earned ${pointsEarned(i)} points!`);
+      return alert(`Correct! The number was ${targetNumber}! You win! \nYou earned ${pointsEarned(i)} points!`);
     }
   } 
   return alert(`Too bad, out of guesses, the number was ${targetNumber}`);
