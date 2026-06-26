@@ -13,15 +13,19 @@ function getPlayerGuess() {
     if (guess < 1) {
       alert("Number too low, please enter a whole number between 1 and 100");
       getPlayerGuess();
+      return guess;
     } else if (guess > 100) {
-      alert ("Number too big, please enter a whole number between 1 and 100");
+      alert("Number too big, please enter a whole number between 1 and 100");
       getPlayerGuess();
+      return guess;
     }
+    
+    return guess;
   } else {
     alert("Please enter a whole number");
     getPlayerGuess();
+    return guess;
   }
-  return guess;
 }
 
 function checkGuess(targetNumber, guess) {
@@ -47,9 +51,8 @@ function game() {
   const targetNumber = generateRandomNumber();
   for (let i = 10; i > 0; i--) {
     let guess = getPlayerGuess();
-    if (guess === null) {
-      alert("Game Cancelled.")
-      return;
+    if (guess === null || isNaN(guess)) {
+      return alert("Game Cancelled.")
     }
     let correct = checkGuess(targetNumber, guess);
     while (numbersGuessed.includes(guess)) {
@@ -61,7 +64,7 @@ function game() {
       if (guess < targetNumber) {
         alert(`Guessed number too low\nGuesses remaining: ${i - 1}\nNumbers guessed: ${numbersGuessed.join(", ")}`);
       } else {
-        alert(`Guess number too high\nGuesses remaining: ${i - 1}\nNumbers guessed: ${numbersGuessed.join(", ")}`);
+        alert(`Guessed number too high\nGuesses remaining: ${i - 1}\nNumbers guessed: ${numbersGuessed.join(", ")}`);
       }
     } else {
       return alert(`Correct! The number was ${targetNumber}! You win! \nYou earned ${pointsEarned(i)} points!`);
