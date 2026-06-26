@@ -51,8 +51,8 @@ function game() {
   const targetNumber = generateRandomNumber();
   for (let i = 10; i > 0; i--) {
     let guess = getPlayerGuess();
-    if (guess === null || isNaN(guess)) {
-      return alert("Game Cancelled.")
+    if (guess === null || isNaN(guess) || guess < 1 || guess > 100) {
+      return alert("Game Cancelled.");
     }
     let correct = checkGuess(targetNumber, guess);
     while (numbersGuessed.includes(guess)) {
