@@ -1,10 +1,11 @@
 function generateRandomNumber() {
-  targetNumber = Math.floor(Math.random() * 100) + 1;
+  const targetNumber = Math.floor(Math.random() * 100) + 1;
+  return targetNumber;
 }
 
 function getPlayerGuess() {
-  guess = prompt("Enter a whole number between 1 and 100");
-  guess = Number(guess);
+  let guess_prompt = prompt("Enter a whole number between 1 and 100");
+  guess = Number(guess_prompt);
   if (guess % 1 === 0)  {
     if (guess < 1) {
       alert("Number too low, please enter a whole number between 1 and 100");
@@ -21,42 +22,49 @@ function getPlayerGuess() {
 }
 
 function checkGuess(targetNumber, guess) {
-  correct = false;
-  checkResult = "";
+  let correct = false;
+  let checkResult = "";
   if (guess < targetNumber) {
-    checkResult = "Guessed number too low";
+    "Guessed number too low";
   } else if (guess > targetNumber) {
-    checkResult = "Guessed number too high";
+    "Guessed number too high";
   } else {
     correct = true;
   }
+  return correct;
 }
 
 function pointsEarned(attempt) {
-  return attempt * 10; //simple point system, the sooner the suer guesses the more points he earns.
+  return attempt * 10; //simple point system, the sooner the user guesses the more points he earns.
 }
 
 function restart() {
-  validation = confirm('Do you wish to restart?');
+  let validation = confirm('Do you wish to restart?');
   
   while (validation){ // Continues asking the user if he wants to restart, once the user says No, it ends the game.
     game();
-    restart();
+    validation = restart();
   }
+  return validation;
 }
 
 function game() {
-  numbersGuessed = [];
-  generateRandomNumber();
+  let numbersGuessed = [];
+  const targetNumber = generateRandomNumber();
   for (let i = 10; i > 0; i--) {
-    checkGuess(targetNumber, getPlayerGuess());
+    let guess = getPlayerGuess();
+    let correct = checkGuess(targetNumber, guess);
     while (numbersGuessed.includes(guess)) {
       alert("You already guessed that number! Try a different one");
-      getPlayerGuess();
+      guess = getPlayerGuess();
     }
     if (!correct) {
       numbersGuessed.push(guess);
-      alert(`${checkResult}, Guesses remaining: ${i - 1}, Numbers guessed: ${numbersGuessed.join(" ")}`);
+      if (guess < targetNumber) {
+        alert(`Guessed number too low, Guesses remaining: ${i - 1}, Numbers guessed: ${numbersGuessed.join(" ")}`);
+      } else {
+        alert(`Guess number too high, Guesses remaining: ${i - 1}, Numbers guessed: ${numbersGuessed.join(" ")}`);
+      }
     } else {
       return alert(`Correct! The number was ${targetNumber}! You win! \n Your earned ${pointsEarned(i)} points!`);
     }
