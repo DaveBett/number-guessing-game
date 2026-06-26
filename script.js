@@ -22,9 +22,7 @@ function getPlayerGuess() {
 }
 
 function checkGuess(targetNumber, guess) {
-  let correct = false;
-  correct = guess === targetNumber ? true : false;
-  return correct;
+  return guess === targetNumber
 }
 
 function pointsEarned(attempt) {
