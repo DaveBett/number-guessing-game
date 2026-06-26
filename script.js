@@ -5,7 +5,7 @@ function generateRandomNumber() {
 
 function getPlayerGuess() {
   let guess_prompt = prompt("Enter a whole number between 1 and 100");
-  guess = Number(guess_prompt);
+  let guess = Number(guess_prompt);
   if (guess % 1 === 0)  {
     if (guess < 1) {
       alert("Number too low, please enter a whole number between 1 and 100");
